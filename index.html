@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie-edge">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <link href="mastermind.css" rel="stylesheet">
+        <title>Mastermind</title>
+    </head>
+    <body>
+        <div id="myApp">
+            <header class="header">
+                  <p class="p2">{{title}}</p>
+              </header>
+              <main role="main" class="flex-shrink-0" >
+                  <div class="container-fluid">
+                    <div class="row main-wrapper">
+                        <div v-on:click="startNewGame()" class="new_game_btn"><button style="position: fixed; top: 55px; right:15px;" class="btn btn-primary">Start new game</button></div>
+                        <div class="colorBox">
+                            <p class="sticky-text">{{order_to_show_1}}</p>
+                            <ul style="list-style:none; column-count: 2;" v-for="color in selectionable_colors">
+                                <li v-if="color.name!=='void'" >
+                                    <button class="round_btn" v-on:click="colorSelected(color)" v-bind:style="{background: color.css}"></button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="score">
+                            <div style="margin-top: 15px;">
+                                <p class="score_text">Won: {{victories}}</p>
+                                <p class="score_text">Lost: {{defeats}}</p>
+                                <p class="score_text">Points: {{points}}</p>
+                            </div>
+                        </div>
+                        <div class="boardGame">
+                            <div class="container">
+                                <div class="btn_text">
+                                    <div class="row" >
+                                        <div class="col">
+                                          <table style="margin-top: 10px;">
+                                              <tr>
+                                                  <td v-for="element in hiddenCode"><button class="round_btn_code" v-bind:style="{background: element.css}">?</button></td>
+                                              </tr>
+                                              <tr v-for="row in game_table" >
+                                                  <td v-for="element in row.game"><button class="round_btn" v-on:click="elementClicked(element)" v-bind:style="{background: element.css}"></button></td>
+                                                  <td v-for="element2 in row.correction_table"><button class="round_btn_small" v-bind:style="{background: element2.css}"></button></td>
+                                              </tr>
+                                          </table>
+                                          <div class="btn_text" style="margin-top: 5px;">
+                                            <button class="btn btn-secondary btn-sm" v-on:click="check_row()">CHECK</button>
+                                           </div> 
+                                        </div>
+                                        <div class="col" >
+                                          <!--<table style="text-align: center;">
+                                              <tr v-for="cRow in correction_table">
+                                                  <td v-for="element in cRow"><button class="round_btn_small" v-on:click="elementClicked(element)" v-bind:style="{background: element.css}"></button></td>
+                                              </tr>
+                                          </table>-->
+                                        </div>
+                                      </div>
+                                </div>
+                           
+                           <div class="btn_text" style="margin-top: 10px">
+                            <p class="txt_orders">{{game_message}}</p>
+                           </div>
+                        </div>
+                            
+                        
+                        
+                    </div>
+                  </div>
+              </main>
+              <footer class="footer">
+                <p class="p3">Done by: {{credentials}}</p>
+              </footer>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+        <script src="mastermind.js"></script>
+    </body>
+</html>
